@@ -2,6 +2,8 @@ import os
 import shutil
 from distutils.dir_util import copy_tree
 
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
 pageList = []  # Empty list of pages
 pageListWoExt = []  # Empty list of pages without extensions
 
@@ -50,3 +52,5 @@ for i in range(len(pageList)):  # Write pages with layout to the site folder
         outputFile.write(output)
 
 copy_tree('copy', '../thedeltaproject.github.io')  # Copy non-html files to the site folder
+
+print('Success!')

@@ -1,2 +1,2 @@
-E:\Programs\Python3\python.exe E:\GitHub\python-site-generator\script.py %*
+python "%~dp0script.py" %*
 pause
