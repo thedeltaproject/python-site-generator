@@ -42,6 +42,11 @@ footer * {
 	padding: 2rem;
 }
 
+h1, h2, h3, h4, h5, h6 {
+	font-weight: normal;
+	color: #4776E6;
+}
+
 .delta {
 	margin: 0;
 	font-size: 5rem;
@@ -122,4 +127,10 @@ th, td {
 
 dt {
 	font-weight: bold;
+}
+
+hr {
+	margin: 1rem 0;
+	border-color: #e9ebec;
+	border-style: solid;
 }
