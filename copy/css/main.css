@@ -96,3 +96,30 @@ img {
 	float: right;
 	margin-left: 1rem;
 }
+
+pre {
+	overflow: auto;
+	background-color: #f3f6fa;
+    border: solid 1px #dce6f0;
+    border-radius: 0.3rem;
+	padding: 0.8rem;
+}
+
+code {
+	background-color: #f3f6fa;
+	padding: 0.125rem 0.25rem;
+	border-radius: 0.3rem;
+}
+
+table {
+	border-collapse:collapse;
+}
+
+th, td {
+	border: 1px solid #e9ebec;
+	padding: 0.5rem 1rem;
+}
+
+dt {
+	font-weight: bold;
+}
