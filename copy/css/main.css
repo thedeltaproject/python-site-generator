@@ -85,10 +85,10 @@ img {
 	margin: 0 0 0 -1rem;
 	enable-background:new 0 0 1000 1000;
 	fill:#cccccc;
+	transition: transform .4s;
 }
 
 .footer-icon:hover {
-	fill: #bbbbbb !important;
 	transform: rotate(-30deg);
 }
 
