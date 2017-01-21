@@ -18,39 +18,39 @@ with open('layout.html', encoding="utf-8") as layout:  # Read layout HTML, split
     layoutParts = layout.read().split('{{ content }}\n')
 
 """
-if os.path.isdir('../thedeltaproject.github.io'):  # TODO: make list noDelete
-    shutil.rmtree('../thedeltaproject.github.io')  # Delete entire site folder
+if os.path.isdir('../delta.im'):  # TODO: make list noDelete
+    shutil.rmtree('../delta.im')  # Delete entire site folder
 """
 
 filesToDelete =[]
 dirsToDelete = []
 
-if os.path.isdir('../thedeltaproject.github.io'):
-    for (dirpath, dirnames, filenames) in os.walk('../thedeltaproject.github.io'):
+if os.path.isdir('../delta.im'):
+    for (dirpath, dirnames, filenames) in os.walk('../delta.im'):
         filesToDelete.extend(filenames)
         dirsToDelete.extend(dirnames)
         break
     if '.git' in dirsToDelete:
         dirsToDelete.remove('.git')
     for file in filesToDelete:
-        os.remove('../thedeltaproject.github.io/' + file)
+        os.remove('../delta.im/' + file)
     for directory in dirsToDelete:
-        shutil.rmtree('../thedeltaproject.github.io/' + directory)
+        shutil.rmtree('../delta.im/' + directory)
 else:
-    os.makedirs('../thedeltaproject.github.io')  # Create new site folder
+    os.makedirs('../delta.im')  # Create new site folder
 
 with open('index.html', encoding="utf-8") as index:  # Write index.html with layout to the site folder
     output = layoutParts[0] + index.read() + layoutParts[1]
-    with open('../thedeltaproject.github.io/index.html', 'w', encoding="utf-8") as outputFile:
+    with open('../delta.im/index.html', 'w', encoding="utf-8") as outputFile:
         outputFile.write(output)
 
 for i in range(len(pageList)):  # Write pages with layout to the site folder
     with open('pages/' + pageList[i], encoding="utf-8") as page:
         output = layoutParts[0]+page.read()+layoutParts[1]
-    os.makedirs('../thedeltaproject.github.io/' + pageListWoExt[i])
-    with open('../thedeltaproject.github.io/' + pageListWoExt[i] + '/index.html', 'w', encoding="utf-8") as outputFile:
+    os.makedirs('../delta.im/' + pageListWoExt[i])
+    with open('../delta.im/' + pageListWoExt[i] + '/index.html', 'w', encoding="utf-8") as outputFile:
         outputFile.write(output)
 
-copy_tree('copy', '../thedeltaproject.github.io')  # Copy non-html files to the site folder
+copy_tree('copy', '../delta.im')  # Copy non-html files to the site folder
 
 print('Success!')
