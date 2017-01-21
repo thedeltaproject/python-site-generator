@@ -78,8 +78,18 @@ img {
 	margin-right: 1rem;
 }
 
+.footer-icon {
+	height:2rem;
+	position:absolute;
+	left:50%;
+	margin: 0 0 0 -1rem;
+	enable-background:new 0 0 1000 1000;
+	fill:#cccccc;
+}
+
 .footer-icon:hover {
 	fill: #bbbbbb !important;
+	transform: rotate(7deg);
 }
 
 .footer-right {
