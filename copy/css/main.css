@@ -7,7 +7,7 @@ body {
 }
 
 header {
-	background-image: linear-gradient(120deg, #4776E6, #8E54E9); /* http://uigradients.com/#ElectricViolet */
+	background-image: linear-gradient(120deg, #3091ff, #2b7fe0);
 	text-align: center;
 	color: white;
 	padding: 5rem;
@@ -44,7 +44,7 @@ footer * {
 
 h1, h2, h3, h4, h5, h6 {
 	font-weight: normal;
-	color: #4776E6;
+	color: #2d89ef;
 }
 
 .delta {
@@ -59,7 +59,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a {
-	color: #4078c0; /* As at GitHub */
+	color: #2d89ef;
 	text-decoration: none;
 }
 
