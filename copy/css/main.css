@@ -35,7 +35,15 @@ footer {
 }
 
 footer * {
-	margin: 0.5rem 0;
+	color: #ABB3AC !important;
+}
+
+footer > :first-child {
+	margin-left: 0;
+}
+
+footer > :last-child {
+	margin-right: 0;
 }
 
 .main-and-footer-container {
@@ -80,26 +88,36 @@ img {
 
 .footer-left {
 	float: left;
-	margin-right: 1rem;
+	margin: 0.5rem 0.3rem 0.5rem 0;
 }
 
-.footer-icon {
+.license-icon {
+	height: 1rem;
+	float: left;
+	margin: 0.75rem 0.3rem 0.75rem 0;
+}
+
+.delta-icon {
 	height:2.5rem;
 	position:absolute;
 	left:50%;
 	margin: 0 0 0 -1rem;
 	enable-background:new 0 0 1000 1000;
-	fill:#cccccc;
+	fill:#ccc;
 	transition: all .4s;
 }
 
-.footer-icon:hover {
+.license-icon path {
+	fill:#ABB3AC; /* CC official */
+}
+
+.delta-icon:hover {
 	transform: rotate(-37.5deg) translate(-0.195rem, -0.023rem);
 }
 
 .footer-right {
 	float: right;
-	margin-left: 1rem;
+	margin: 0.5rem 0 0.5rem 1rem;
 }
 
 pre {
