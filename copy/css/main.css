@@ -19,11 +19,11 @@ main {
 	margin-bottom: 2rem;
 }
 
-main :first-child {
+main > :first-child {
 	margin-top: 0;
 }
 
-main :last-child {
+main > :last-child {
 	margin-bottom: 0;
 }
 
@@ -61,10 +61,6 @@ h1, h2, h3, h4, h5, h6 {
 a {
 	color: #2d89ef;
 	text-decoration: none;
-}
-
-a[href*="wikipedia.org"]:before {
-	content: "" url('/img/wiki.svg');
 }
 
 a:hover {
@@ -137,4 +133,15 @@ hr {
 	margin: 1rem 0;
 	border-color: #e9ebec;
 	border-style: solid;
+}
+
+.bullet {
+	height:1rem;
+	float: left;
+	margin: 0.25rem 0.25rem 0.25rem 1.25rem;
+}
+
+.no-bullet {
+	list-style-type: none;
+	padding: 0;
 }
