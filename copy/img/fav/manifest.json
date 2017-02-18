@@ -2,12 +2,12 @@
     "name": "Delta",
     "icons": [
         {
-            "src": "/img/fav/android-chrome-192x192.png?v=BGBnL3L9Av",
+            "src": "/img/fav/android-chrome-192x192.png?v=QE5xK79NgB",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "/img/fav/android-chrome-512x512.png?v=BGBnL3L9Av",
+            "src": "/img/fav/android-chrome-512x512.png?v=QE5xK79NgB",
             "sizes": "512x512",
             "type": "image/png"
         }

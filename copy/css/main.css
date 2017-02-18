@@ -35,7 +35,7 @@ footer {
 }
 
 footer * {
-	color: #ABB3AC !important;
+	color: #ABB3AC !important; /* CC official */
 }
 
 footer > :first-child {
@@ -88,43 +88,38 @@ img {
 
 .footer-left {
 	float: left;
-	margin: 0.5rem 0.3rem 0.5rem 0;
+	margin: 0.25rem 0.3rem 0.25rem 0;
+}
+
+.footer-right {
+	float: right;
+	margin: 0.25rem 0 0.25rem 1rem;
 }
 
 .license-icon {
 	height: 1rem;
 	float: left;
-	margin: 0.75rem 0.3rem 0.75rem 0;
+	margin: 0.5rem 0.3rem 0.5rem 0;
 }
 
 .delta-icon {
-	height:2.5rem;
+	height:2rem;
 	position:absolute;
 	left:50%;
 	margin: 0 0 0 -1rem;
 	enable-background:new 0 0 1000 1000;
-	fill:#ccc;
 	transition: all .4s;
 }
 
-.license-icon path {
-	fill:#ABB3AC; /* CC official */
-}
-
 .delta-icon:hover {
-	transform: rotate(-37.5deg) translate(-0.195rem, -0.023rem);
-}
-
-.footer-right {
-	float: right;
-	margin: 0.5rem 0 0.5rem 1rem;
+	transform: rotate(-30deg) translate(-0.3rem, -0.25rem);
 }
 
 pre {
 	overflow: auto;
 	background-color: #f3f6fa;
-    border: solid 1px #dce6f0;
-    border-radius: 0.3rem;
+  border: solid 1px #dce6f0;
+  border-radius: 0.3rem;
 	padding: 0.8rem;
 }
 
