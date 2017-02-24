@@ -86,19 +86,18 @@ footer > :last-child {
 }
 
 h1, h2, h3, h4, h5, h6 {
-	font-weight: normal;
+	font-weight: bold;
 	color: #000;
 	line-height: 1.2;
-	margin: 1rem 0;
-}
-
-h1, h3, h4, h5, h6 {
-	font-weight: bold;
+	margin: 1rem 0 0 0;
 }
 
 h1, h2 {
-	border-bottom: 1px solid #aaa;
-	margin: 2rem 0 1rem 0;
+	margin: 2rem 0 0 0;
+}
+
+h2 {
+	font-weight: normal;
 }
 
 a {
@@ -120,45 +119,52 @@ h1 > a:hover {
 }
 
 h1 > a:after,
-p > a:after {
+p > a:after,
+li > a:after {
 	display: inline-block;
 	content:"";
 	position: relative;
 }
 
-p > a:after {
+p > a:not([href*="//"]):after,
+li > a:not([href*="//"]):after {
+	background-image: url('/img/delta_small_blue.svg');
+	top: 0.1rem;
+	left: 0.05rem;
+	margin: -0.1rem 0.05rem -0.1rem 0;
+	background-size: 1.2rem 1.2rem;
+	width: 1.2rem;
+	height: 1.2rem;
+}
+
+p > a[href*="//"]:not([href*="wikipedia.org"]):after,
+li > a[href*="//"]:not([href*="wikipedia.org"]):after {
+	background-image: url('/img/out.svg');
+	top: 0.1rem;
+	left: 0.1rem;
 	background-size: 1rem 1rem;
 	width: 1rem;
 	height: 1rem;
 }
 
-h1 > a:after {
-	background-size: 1.5rem 1.5rem;
-	width: 1.5rem;
-	height: 1.5rem;
-}
-
-p > a:not([href*="//"]):after {
-	background-image: url('/img/delta_small_blue.svg');
-	top: 0.15rem;
-}
-
-p > a[href*="//"]:not([href*="wikipedia.org"]):after {
-	background-image: url('/img/out.svg');
-	top: 0.1rem;
-	left: 0.1rem;
-}
-
-p > a[href*="//"][href*="wikipedia.org"]:after {
+p > a[href*="//"][href*="wikipedia.org"]:after,
+li > a[href*="//"][href*="wikipedia.org"]:after {
 	background-image: url('/img/wiki_blue.svg');
-	top: 0.2rem;
+	top: 0.15rem;
 	left: 0.1rem;
+	margin: -0.1rem 0.1rem -0.1rem 0;
+	background-size: 1.2rem 1.2rem;
+	width: 1.2rem;
+	height: 1.2rem;
 }
 
 h1 > a[href*="//"][href*="wikipedia.org"]:after {
 	background-image: url('/img/wiki.svg');
 	top: -0.4rem;
 	left: -0.1rem;
+	background-size: 1.5rem 1.5rem;
+	width: 1.5rem;
+	height: 1.5rem;
 }
 
 footer > a {
@@ -210,20 +216,38 @@ hr {
 }
 
 p {
-	margin: 1rem 0;
+	margin: 1rem 0 0 0;
 }
 
 b {
 	color: #000;
 }
 
-.bullet {
-	height:1rem;
-	float: left;
-	margin: 0.25rem 0.25rem 0.25rem 1.25rem;
+ol, ul {
+	padding-left: inherit;
 }
 
-.no-bullet {
-	list-style-type: none;
-	padding: 0;
+d1, d2, d3, d4, d5, d6 {
+	display: block;
+	margin: 0.6rem 0 0 0;
+	padding: 0 0 0 1rem;
+	border-left: 2px solid #ccc;
+}
+
+d1 > :first-child,
+d2 > :first-child,
+d3 > :first-child,
+d4 > :first-child,
+d5 > :first-child,
+d6 > :first-child {
+	margin-top: 0;
+}
+
+d1 > :last-child,
+d2 > :last-child,
+d3 > :last-child,
+d4 > :last-child,
+d5 > :last-child,
+d6 > :last-child {
+	margin-bottom: 0;
 }
