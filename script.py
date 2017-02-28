@@ -1,4 +1,5 @@
 import os
+import re
 import shutil
 from distutils.dir_util import copy_tree
 
@@ -16,11 +17,6 @@ for pageName in pageList:
 
 with open('../site-source-code/layout.html', encoding="utf-8") as layout:  # Read layout HTML, split on content and write to layoutParts
     layoutParts = layout.read().split('{{ content }}\n')
-
-"""
-if os.path.isdir('../delta.im'):  # TODO: make list noDelete
-    shutil.rmtree('../delta.im')  # Delete entire site folder
-"""
 
 filesToDelete = []
 dirsToDelete = []
@@ -62,14 +58,40 @@ for i in range(len(pageList)):  # Write table of articles
     with open('../delta.im/' + pageListWoExt[i] + '/index.html', encoding="utf-8") as postFile:
         post = postFile.read()
     if post.find('{{ table }}\n') > 0:
-        post = post.replace('{{ table }}\n', articles)
+        linesToReplace = []
+        for line in post.splitlines(True):
+            print('print line: ' + line, end='')
+            if '{{ table }}\n' in line:
+                print('print IF line: ' + line, end='')
+                if line not in linesToReplace:
+                    linesToReplace.append(line)
+        print(linesToReplace)
+        for line in linesToReplace:
+            indent = line.replace('{{ table }}\n', '')
+            articlesToPost = ''
+            for article in articles.splitlines(True):
+                articlesToPost += indent + article
+            post = post.replace(line, articlesToPost)
         with open('../delta.im/' + pageListWoExt[i] + '/index.html', 'w', encoding="utf-8") as outputFile:
             outputFile.write(post)
 
 with open('../delta.im/index.html', encoding="utf-8") as postFile:
     post = postFile.read()
 if post.find('{{ table }}\n') > 0:
-    post = post.replace('{{ table }}\n', articles)
+    linesToReplace = []
+    for line in post.splitlines(True):
+        print('print line: ' + line, end='')
+        if '{{ table }}\n' in line:
+            print('print IF line: ' + line, end='')
+            if line not in linesToReplace:
+                linesToReplace.append(line)
+    print(linesToReplace)
+    for line in linesToReplace:
+        indent = line.replace('{{ table }}\n', '')
+        articlesToPost = ''
+        for article in articles.splitlines(True):
+            articlesToPost += indent + article
+        post = post.replace(line, articlesToPost)
     with open('../delta.im/index.html', 'w', encoding="utf-8") as outputFile:
         outputFile.write(post)
 
