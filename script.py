@@ -60,12 +60,9 @@ for i in range(len(pageList)):  # Write table of articles
     if post.find('{{ table }}\n') > 0:
         linesToReplace = []
         for line in post.splitlines(True):
-            print('print line: ' + line, end='')
             if '{{ table }}\n' in line:
-                print('print IF line: ' + line, end='')
                 if line not in linesToReplace:
                     linesToReplace.append(line)
-        print(linesToReplace)
         for line in linesToReplace:
             indent = line.replace('{{ table }}\n', '')
             articlesToPost = ''
@@ -80,12 +77,9 @@ with open('../delta.im/index.html', encoding="utf-8") as postFile:
 if post.find('{{ table }}\n') > 0:
     linesToReplace = []
     for line in post.splitlines(True):
-        print('print line: ' + line, end='')
         if '{{ table }}\n' in line:
-            print('print IF line: ' + line, end='')
             if line not in linesToReplace:
                 linesToReplace.append(line)
-    print(linesToReplace)
     for line in linesToReplace:
         indent = line.replace('{{ table }}\n', '')
         articlesToPost = ''
