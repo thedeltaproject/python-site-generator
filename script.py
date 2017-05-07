@@ -35,7 +35,7 @@ def import_pages(page_list, page_type, directory):
 
 def dissect(content, string, string_index):
     first_part = content[:string_index]
-    newline_index = first_part.rindex('\n')  # TODO: exception
+    newline_index = first_part.rindex('\n')
     indent_string = first_part[newline_index + 1:]
     first_part = first_part[:newline_index + 1]
     second_part = content[string_index + len(string):]
