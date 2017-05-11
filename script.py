@@ -1,3 +1,4 @@
+import re
 import os
 import shutil
 
@@ -6,6 +7,7 @@ class Page:
     def __init__(self):
         self.name = 'noname'
         self.type = 'notype'
+        self.content = 'nocontent'
 
     def __str__(self):
         return '"' + self.name + '" ' + self.type
@@ -17,6 +19,18 @@ class Page:
     def __eq__(self, other):
         return self.name == other.name
 
+    def get_variables(self):
+        pattern = '---\n(.+=.*\n)+---\n'  # Front matter
+        match = re.match(pattern, self.content)
+        if match:
+            self.content = self.content[len(match.group(0)):]
+            entries = re.split("\n", match.group(0)[4:-4])
+            if entries[-1] == '':
+                entries.pop()
+            for i in range(len(entries)):
+                entry = re.split("=", entries[i])
+                setattr(self, entry[0], entry[1])
+
 
 def import_page(page_list, page_type, directory, file_name):
     with open(directory + '/' + file_name, encoding="utf-8") as file:
@@ -24,6 +38,7 @@ def import_page(page_list, page_type, directory, file_name):
         a.type = page_type
         a.content = file.read()
         a.name = file_name.split('.')[0]
+        a.get_variables()
         page_list.append(a)
 
 
@@ -53,11 +68,10 @@ def wrap_pages():
         page.content = layout_top + new_split + layout_bottom
 
 
-def unordered_page_list():
-    string = '{{ table }}\n'
+def process_table():
+    string = '{{table}}\n'
 
-    table = []
-    table.append('<ol>\n')
+    table = ['<ol>\n']
     for page in pages:
         if page.type == 'normal':
             table.append('  <li><a href="/' + page.name + '">' + page.name + '</a></li>\n')
@@ -72,6 +86,29 @@ def unordered_page_list():
                 indented_table.append(indent + line)
             indented_table = ''.join(indented_table)
             page.content = top + indented_table + bottom
+
+
+def process_variables():
+    for page in pages:
+        if hasattr(page, 'twitter_card') and page.twitter_card != '':
+            page.content = page.content.replace('{{card}}', page.twitter_card, 1)
+        else:
+            page.content = page.content.replace('{{card}}', 'summary_large_image', 1)  # Default value
+
+        if hasattr(page, 'twitter_title') and page.twitter_title != '':
+            page.content = page.content.replace('{{title}}', page.twitter_title, 1)
+        else:
+            page.content = page.content.replace('{{title}}', 'The Delta Project', 1)  # Default value
+
+        if hasattr(page, 'twitter_description') and page.twitter_description != '':
+            page.content = page.content.replace('{{description}}', page.twitter_description, 1)
+        else:
+            page.content = page.content.replace('{{description}}', 'Про науку, трансгуманизм и светлое будущее', 1)  # Default value
+
+        if hasattr(page, 'twitter_image') and page.twitter_image != '':
+            page.content = page.content.replace('{{image}}', page.twitter_image, 1)
+        else:
+            page.content = page.content.replace('{{image}}', 'https://delta.im/img/cover.png', 1)  # Default value
 
 
 def delete_old():
@@ -120,12 +157,13 @@ import_pages(pages, 'test', pages_test_dir)
 pages.sort()
 
 # Process pages
-with open(layout_file, encoding="utf-8") as file:
-    layout_content = file.read()
-layout_top, layout_bottom, layout_indent = dissect(layout_content, '{{ content }}\n',
-                                                   layout_content.index('{{ content }}\n'))
+with open(layout_file, encoding="utf-8") as layout:
+    layout_content = layout.read()
+layout_top, layout_bottom, layout_indent = dissect(layout_content, '{{content}}\n',
+                                                   layout_content.index('{{content}}\n'))
 wrap_pages()
-unordered_page_list()
+process_table()
+process_variables()
 
 # Delete old website
 delete_old()
@@ -133,3 +171,10 @@ delete_old()
 # Generate new website
 export_pages()
 copy_files()
+
+for i in range(len(pages)):
+    if pages[i].name == 'test':
+        print(pages[i].__dict__)
+        print()
+        for key in pages[i].__dict__:
+            print(key)
