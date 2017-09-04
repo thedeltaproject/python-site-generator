@@ -32,6 +32,33 @@ class Page:
                 setattr(self, entry[0], entry[1])
 
 
+class Layout:
+    def __init__(self):
+        self.name = 'noname'
+        self.type = 'notype'
+        self.content = 'nocontent'
+
+    def __str__(self):
+        return '"' + self.name + '" ' + self.type
+    __repr__ = __str__
+
+
+def import_layout(layout_list, directory, file_name):
+    with open(directory + '/' + file_name, encoding="utf-8") as file:
+        a = Layout()
+        content = file.read()
+        a.top, a.bottom, a.indent = dissect(content, '{{content}}\n',
+                                            content.index('{{content}}\n'))
+        a.name = file_name.split('.')[0]
+        layout_list.append(a)
+
+
+def import_layouts(layout_list, directory):
+    for file_name in next(os.walk(directory))[2]:
+        if file_name.endswith(".html"):
+            import_layout(layout_list, directory, file_name)
+
+
 def import_page(page_list, page_type, directory, file_name):
     with open(directory + '/' + file_name, encoding="utf-8") as file:
         a = Page()
@@ -63,6 +90,22 @@ def wrap_pages():
         if split[-1] == '':
             split.pop()
         new_split = ''
+
+        if hasattr(page, 'layout') and page.layout != '':
+            for layout in layouts:
+                if layout.name == page.layout:
+                    layout_indent = layout.indent
+                    layout_top = layout.top
+                    layout_bottom = layout.bottom
+                    break
+        else:
+            for layout in layouts:
+                if layout.name == 'default':
+                    layout_indent = layout.indent
+                    layout_top = layout.top
+                    layout_bottom = layout.bottom
+                    break
+
         for line in split:
             new_split += layout_indent + line + '\n'
         page.content = layout_top + new_split + layout_bottom
@@ -145,9 +188,9 @@ source_dir = os.path.abspath('../site-source-code')
 pages_normal_dir = source_dir + "/pages"
 pages_test_dir = source_dir + "/pages-test"
 copy_dir = source_dir + "/copy"
+layouts_dir = source_dir + "/layouts"
 # Important files
 index_file = source_dir + "/index.html"
-layout_file = source_dir + "/layout.html"
 
 # Import pages
 pages = []
@@ -157,10 +200,8 @@ import_pages(pages, 'test', pages_test_dir)
 pages.sort()
 
 # Process pages
-with open(layout_file, encoding="utf-8") as layout:
-    layout_content = layout.read()
-layout_top, layout_bottom, layout_indent = dissect(layout_content, '{{content}}\n',
-                                                   layout_content.index('{{content}}\n'))
+layouts = []
+import_layouts(layouts, layouts_dir)
 wrap_pages()
 process_table()
 process_variables()
